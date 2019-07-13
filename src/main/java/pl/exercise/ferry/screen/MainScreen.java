@@ -1,16 +1,26 @@
 package pl.exercise.ferry.screen;
 
+
 import java.util.Scanner;
 
 public class MainScreen implements Screen {
+    PaymentManager paymentManager;
 
-  private final Scanner in = new Scanner(System.in);
 
-  public void interact() {
-    System.out.println("To jak, do bierzemy się za robote?");
-    String firstResponse = in.nextLine();
-    if ("tak".equalsIgnoreCase(firstResponse)) {
-      System.out.println("To super!");
+    private final Scanner in = new Scanner(System.in);
+
+    public MainScreen(PaymentManager paymentManager) {
+        this.paymentManager = paymentManager;
     }
-  }
+
+    public int interact() {
+        System.out.println("\nWitaj, czy chcesz kupić bilet? [tak]/[nie]");
+        String answer = in.nextLine();
+        if("tak".equals(answer)){
+            paymentManager.setSaldo(0);
+            return 1;
+        }
+        return 0;
+    }
 }
+
